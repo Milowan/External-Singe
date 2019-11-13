@@ -384,6 +384,7 @@ MonoBehaviour:
     steering: 0
   nextWaypoint: {fileID: 0}
   maxTorque: 5000
+  range: 3
 --- !u!1 &495160951142107385
 GameObject:
   m_ObjectHideFlags: 0
