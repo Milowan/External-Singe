@@ -19,14 +19,14 @@ public class AICar : CarController
     private void Steer()
     {
 
-        Quaternion leftAngle = Quaternion.AngleAxis(maxSteerAngle, Vector3.forward);
-        Quaternion rightAngle = Quaternion.AngleAxis(-maxSteerAngle, Vector3.forward);
+        Quaternion leftAngle = Quaternion.AngleAxis(maxSteerAngle, tf.up);
+        Quaternion rightAngle = Quaternion.AngleAxis(-maxSteerAngle, tf.up);
         RaycastHit leftHit;
         RaycastHit rightHit;
-        bool hitL = (Physics.Raycast(tf.position, leftAngle.eulerAngles, out leftHit, range) && !(leftHit.collider.GetComponent<Terrain>()));
-        bool hitR = (Physics.Raycast(tf.position, rightAngle.eulerAngles, out rightHit, range) && !(rightHit.collider.GetComponent<Terrain>()));
-        Debug.DrawRay(tf.position, leftAngle.eulerAngles * range);
-        Debug.DrawRay(tf.position, rightAngle.eulerAngles * range);
+        bool hitL = (Physics.Raycast(tf.position, leftAngle * tf.forward, out leftHit, range) && !(leftHit.collider.GetComponent<Terrain>()));
+        bool hitR = (Physics.Raycast(tf.position, rightAngle * tf.forward, out rightHit, range) && !(rightHit.collider.GetComponent<Terrain>()));
+        Debug.DrawRay(tf.position, leftAngle * tf.forward * range);
+        Debug.DrawRay(tf.position, rightAngle * tf.forward * range);
 
         if (!hitL && !hitR)
         {
@@ -55,11 +55,11 @@ public class AICar : CarController
         }
         else if (leftHit.collider != null)
         {
-            steerAngle = -1;
+            steerAngle = 1;
         }
         else if (rightHit.collider != null)
         {
-            steerAngle = 1;
+            steerAngle = -1;
         }
 
         
