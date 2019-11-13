@@ -376,6 +376,8 @@ MonoBehaviour:
     steering: 0
   nextWaypoint: {fileID: 0}
   maxTorque: 5000
+  respawnTimer: 0
+  timeToRespawn: 3
 --- !u!1 &8319350616924711753
 GameObject:
   m_ObjectHideFlags: 0

@@ -5,34 +5,27 @@ using UnityEngine;
 public class CarController : MonoBehaviour
 {
     public List<AxelData> axels;
-    private List<Transform> waypoints;
-    public Transform nextWaypoint;
+    protected Transform respawnPoint;
     protected Transform tf;
-    private int targetWaypointIndex;
     protected float torque;
     protected float steerAngle;
     public float maxTorque;
     protected float maxSteerAngle;
 
     protected bool racing;
+    public float respawnTimer;
+    public float timeToRespawn;
+    private Vector3 startPosition;
+    private Quaternion startRotation;
 
     private void Start()
     {
         maxSteerAngle = 30;
-        GameObject[] points = GameObject.FindGameObjectsWithTag("Waypoint");
-        racing = true;
-        waypoints = new List<Transform>();
-        if (points != null)
-        {
-            foreach (GameObject point in points)
-            {
-                waypoints.Add(point.GetComponent<Transform>());
-            }
-        }
-
+        GameEventManager.GameStart += GameStart;
+        GameEventManager.RaceStart += RaceStart;
         tf = GetComponent<Transform>();
-        targetWaypointIndex = 0;
-        nextWaypoint = waypoints[targetWaypointIndex];
+        startPosition = tf.position;
+        startRotation = tf.rotation;
     }
 
     public void UpdateWheel(WheelCollider wheel)
@@ -74,21 +67,47 @@ public class CarController : MonoBehaviour
                 UpdateWheel(axel.GetRight());
             }
         }
+
+        if (Vector3.Dot(tf.up, Vector3.down) > 0)
+        {
+            respawnTimer += Time.deltaTime;
+        }
+        else
+        {
+            respawnTimer = 0;
+        }
+
+        if (respawnTimer >= timeToRespawn)
+        {
+            Respawn();
+        }
+    }
+
+
+    private void Respawn()
+    {
+        tf.position = respawnPoint.position;
+        tf.rotation = respawnPoint.rotation;
     }
 
     private void OnTriggerEnter(Collider other)
     {
-        if (other.gameObject.CompareTag("Waypoint"))
+        if (other.gameObject.CompareTag("RespawnPoint"))
         {
-            if (nextWaypoint == other.GetComponent<Transform>())
-            {
-                targetWaypointIndex++;
-                if (targetWaypointIndex >= waypoints.Count)
-                {
-                    targetWaypointIndex = 0;
-                }
-                nextWaypoint = waypoints[targetWaypointIndex];
-            }
+            respawnPoint = other.gameObject.transform;
+            respawnTimer = 0;
         }
+    }
+
+    private void GameStart()
+    {
+        tf.position = startPosition;
+        tf.rotation = startRotation;
+        racing = false;
+    }
+
+    private void RaceStart()
+    {
+        racing = true;
     }
 }
