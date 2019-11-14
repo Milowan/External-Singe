@@ -7,6 +7,8 @@ TagManager:
   - Container
   - Waypoint
   - RespawnPoint
+  - PContainer
+  - PWaypoint
   layers:
   - Default
   - TransparentFX

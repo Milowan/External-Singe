@@ -7,6 +7,7 @@ public class CarController : MonoBehaviour
     public List<AxelData> axels;
     protected Transform respawnPoint;
     protected Transform tf;
+    private Rigidbody body;
     protected float torque;
     protected float steerAngle;
     public float maxTorque;
@@ -18,12 +19,18 @@ public class CarController : MonoBehaviour
     private Vector3 startPosition;
     private Quaternion startRotation;
 
+    public int lapCnt;
+    public bool finished;
+
     private void Start()
     {
+        lapCnt = 0;
         maxSteerAngle = 30;
         GameEventManager.GameStart += GameStart;
+        GameEventManager.GameOver += GameOver;
         GameEventManager.RaceStart += RaceStart;
         tf = GetComponent<Transform>();
+        body = GetComponent<Rigidbody>();
         startPosition = tf.position;
         startRotation = tf.rotation;
     }
@@ -90,20 +97,18 @@ public class CarController : MonoBehaviour
         tf.rotation = respawnPoint.rotation;
     }
 
-    private void OnTriggerEnter(Collider other)
-    {
-        if (other.gameObject.CompareTag("RespawnPoint"))
-        {
-            respawnPoint = other.gameObject.transform;
-            respawnTimer = 0;
-        }
-    }
-
     private void GameStart()
     {
         tf.position = startPosition;
         tf.rotation = startRotation;
+        body.velocity.Set(0.0f, 0.0f, 0.0f);
         racing = false;
+        finished = false;
+    }
+
+    private void GameOver()
+    {
+        lapCnt = 0;
     }
 
     private void RaceStart()

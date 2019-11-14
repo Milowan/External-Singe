@@ -9,18 +9,17 @@ public class AICar : CarController
     private GameObject[] containers;
     public Transform nextWaypoint;
     private int targetWaypointIndex;
-    private bool frame1 = true;
+
+    private void Awake()
+    {
+        containers = GameObject.FindGameObjectsWithTag("Container");
+        waypoints = new List<Transform>();
+        SelectPath();
+    }
 
     // Update is called once per frame
     void Update()
     {
-        if (frame1)
-        {
-            frame1 = false;
-            containers = GameObject.FindGameObjectsWithTag("Container");
-            waypoints = new List<Transform>();
-            SelectPath();
-        }
         if (racing)
         {
             torque = 1;
@@ -98,6 +97,7 @@ public class AICar : CarController
                 targetWaypointIndex++;
                 if (targetWaypointIndex >= waypoints.Count)
                 {
+                    ++lapCnt;
                     SelectPath();
                 }
                 nextWaypoint = waypoints[targetWaypointIndex];
