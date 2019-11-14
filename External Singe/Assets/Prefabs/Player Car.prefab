@@ -315,7 +315,7 @@ GameObject:
   - component: {fileID: 5721343067427857434}
   m_Layer: 0
   m_Name: Player Car
-  m_TagString: Untagged
+  m_TagString: Car
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -374,7 +374,8 @@ MonoBehaviour:
     right: {fileID: 8319350615156364243}
     motor: 0
     steering: 0
-  maxTorque: 5000
+  baseTorque: 0
+  boostTorque: 0
   respawnTimer: 0
   timeToRespawn: 3
   lapCnt: 0

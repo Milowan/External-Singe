@@ -9,6 +9,7 @@ TagManager:
   - RespawnPoint
   - PContainer
   - PWaypoint
+  - Car
   layers:
   - Default
   - TransparentFX

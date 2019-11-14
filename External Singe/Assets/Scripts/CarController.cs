@@ -10,8 +10,10 @@ public class CarController : MonoBehaviour
     private Rigidbody body;
     protected float torque;
     protected float steerAngle;
-    public float maxTorque;
+    public float baseTorque;
+    public float boostTorque;
     protected float maxSteerAngle;
+    protected bool boosting;
 
     protected bool racing;
     public float respawnTimer;
@@ -33,6 +35,7 @@ public class CarController : MonoBehaviour
         body = GetComponent<Rigidbody>();
         startPosition = tf.position;
         startRotation = tf.rotation;
+        boosting = false;
     }
 
     public void UpdateWheel(WheelCollider wheel)
@@ -55,6 +58,15 @@ public class CarController : MonoBehaviour
     {
         if (racing)
         {
+            float maxTorque;
+            if (boosting)
+            {
+                maxTorque = boostTorque;
+            }
+            else
+            {
+                maxTorque = baseTorque;
+            }
             float motor = maxTorque * torque;
             float steering = maxSteerAngle * steerAngle;
 

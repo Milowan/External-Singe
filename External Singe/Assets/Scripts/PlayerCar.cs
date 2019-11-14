@@ -18,6 +18,10 @@ public class PlayerCar : CarController
         {
             torque = Input.GetAxis("Vertical");
             steerAngle = Input.GetAxis("Horizontal");
+            if (Input.GetButton("Boost"))
+            {
+                boosting = true;
+            }
         }
         GuiManager.playerLap = lapCnt;
     }

@@ -24,6 +24,11 @@ public class AICar : CarController
         {
             torque = 1;
             Steer();
+            RaycastHit hit;
+            if (Physics.Raycast(tf.position, tf.forward, out hit, range) && hit.collider.gameObject.CompareTag("Car"))
+            {
+                boosting = true;
+            }
         }
 
     }
@@ -48,8 +53,6 @@ public class AICar : CarController
         RaycastHit rightHit;
         bool hitL = (Physics.Raycast(tf.position, leftAngle * tf.forward, out leftHit, range) && !(leftHit.collider.GetComponent<Terrain>() || leftHit.collider.gameObject.CompareTag("Waypoint")));
         bool hitR = (Physics.Raycast(tf.position, rightAngle * tf.forward, out rightHit, range) && !(rightHit.collider.GetComponent<Terrain>() || rightHit.collider.gameObject.CompareTag("Waypoint")));
-        Debug.DrawRay(tf.position, leftAngle * tf.forward * range);
-        Debug.DrawRay(tf.position, rightAngle * tf.forward * range);
 
         if (!hitL && !hitR)
         {
