@@ -11,7 +11,7 @@ public class CarController : MonoBehaviour
     protected float torque;
     protected float steerAngle;
     public float baseTorque;
-    public float boostTorque;
+    public float thrust;
     protected float maxSteerAngle;
     protected bool boosting;
 
@@ -58,16 +58,11 @@ public class CarController : MonoBehaviour
     {
         if (racing)
         {
-            float maxTorque;
             if (boosting)
             {
-                maxTorque = boostTorque;
+                body.AddForce(tf.forward * thrust);
             }
-            else
-            {
-                maxTorque = baseTorque;
-            }
-            float motor = maxTorque * torque;
+            float motor = baseTorque * torque;
             float steering = maxSteerAngle * steerAngle;
 
             foreach (AxelData axel in axels)
@@ -87,7 +82,7 @@ public class CarController : MonoBehaviour
             }
         }
 
-        if (Vector3.Dot(tf.up, Vector3.down) > 0)
+        if (Vector3.Dot(tf.up, Vector3.down) > 0 || body.velocity == Vector3.zero)
         {
             respawnTimer += Time.deltaTime;
         }

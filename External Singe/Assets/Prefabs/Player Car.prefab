@@ -374,8 +374,8 @@ MonoBehaviour:
     right: {fileID: 8319350615156364243}
     motor: 0
     steering: 0
-  baseTorque: 0
-  boostTorque: 0
+  baseTorque: 5000
+  thrust: 10
   respawnTimer: 0
   timeToRespawn: 3
   lapCnt: 0
