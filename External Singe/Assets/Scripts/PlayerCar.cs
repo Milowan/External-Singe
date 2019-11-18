@@ -22,6 +22,18 @@ public class PlayerCar : CarController
             {
                 boosting = true;
             }
+            else
+            {
+                boosting = false;
+            }
+            if (Input.GetButton("Brake"))
+            {
+                braking = true;
+            }
+            else
+            {
+                braking = false;
+            }
         }
         GuiManager.playerLap = lapCnt;
     }

@@ -370,11 +370,14 @@ MonoBehaviour:
     right: {fileID: 8319350615383124850}
     motor: 1
     steering: 1
+    brakes: 1
   - left: {fileID: 8319350617148044098}
     right: {fileID: 8319350615156364243}
     motor: 0
     steering: 0
+    brakes: 1
   baseTorque: 5000
+  brakeTorque: 15000
   thrust: 10
   respawnTimer: 0
   timeToRespawn: 3
@@ -540,11 +543,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 8319350615156364242}
     m_Modifications:
-    - target: {fileID: 6352765080242983741, guid: b0b1892e4f9ccf8428935699ad999c63,
-        type: 3}
-      propertyPath: m_Name
-      value: Tire
-      objectReference: {fileID: 0}
     - target: {fileID: 6352765080242983740, guid: b0b1892e4f9ccf8428935699ad999c63,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -599,6 +597,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 90
+      objectReference: {fileID: 0}
+    - target: {fileID: 6352765080242983741, guid: b0b1892e4f9ccf8428935699ad999c63,
+        type: 3}
+      propertyPath: m_Name
+      value: Tire
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: b0b1892e4f9ccf8428935699ad999c63, type: 3}
@@ -615,11 +618,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 8319350615383124621}
     m_Modifications:
-    - target: {fileID: 6352765080242983741, guid: b0b1892e4f9ccf8428935699ad999c63,
-        type: 3}
-      propertyPath: m_Name
-      value: Tire
-      objectReference: {fileID: 0}
     - target: {fileID: 6352765080242983740, guid: b0b1892e4f9ccf8428935699ad999c63,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -674,6 +672,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 90
+      objectReference: {fileID: 0}
+    - target: {fileID: 6352765080242983741, guid: b0b1892e4f9ccf8428935699ad999c63,
+        type: 3}
+      propertyPath: m_Name
+      value: Tire
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: b0b1892e4f9ccf8428935699ad999c63, type: 3}
@@ -690,11 +693,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 8319350617148044125}
     m_Modifications:
-    - target: {fileID: 6352765080242983741, guid: b0b1892e4f9ccf8428935699ad999c63,
-        type: 3}
-      propertyPath: m_Name
-      value: Tire
-      objectReference: {fileID: 0}
     - target: {fileID: 6352765080242983740, guid: b0b1892e4f9ccf8428935699ad999c63,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -749,6 +747,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 90
+      objectReference: {fileID: 0}
+    - target: {fileID: 6352765080242983741, guid: b0b1892e4f9ccf8428935699ad999c63,
+        type: 3}
+      propertyPath: m_Name
+      value: Tire
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: b0b1892e4f9ccf8428935699ad999c63, type: 3}
@@ -765,11 +768,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 8319350615364288265}
     m_Modifications:
-    - target: {fileID: 6352765080242983741, guid: b0b1892e4f9ccf8428935699ad999c63,
-        type: 3}
-      propertyPath: m_Name
-      value: Tire
-      objectReference: {fileID: 0}
     - target: {fileID: 6352765080242983740, guid: b0b1892e4f9ccf8428935699ad999c63,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -824,6 +822,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 90
+      objectReference: {fileID: 0}
+    - target: {fileID: 6352765080242983741, guid: b0b1892e4f9ccf8428935699ad999c63,
+        type: 3}
+      propertyPath: m_Name
+      value: Tire
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: b0b1892e4f9ccf8428935699ad999c63, type: 3}

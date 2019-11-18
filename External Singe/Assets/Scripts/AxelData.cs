@@ -9,6 +9,7 @@ public class AxelData
     public WheelCollider right;
     public bool motor;
     public bool steering;
+    public bool brakes;
 
     public bool IsMotor()
     {
@@ -18,6 +19,12 @@ public class AxelData
     public bool IsSteering()
     {
         return steering;
+    }
+
+
+    public bool IsBraked()
+    {
+        return brakes;
     }
 
     public WheelCollider GetLeft()

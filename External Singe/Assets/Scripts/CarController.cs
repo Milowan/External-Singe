@@ -11,9 +11,11 @@ public class CarController : MonoBehaviour
     protected float torque;
     protected float steerAngle;
     public float baseTorque;
+    public float brakeTorque;
     public float thrust;
     protected float maxSteerAngle;
     protected bool boosting;
+    protected bool braking;
 
     protected bool racing;
     public float respawnTimer;
@@ -36,6 +38,7 @@ public class CarController : MonoBehaviour
         startPosition = tf.position;
         startRotation = tf.rotation;
         boosting = false;
+        enabled = false;
     }
 
     public void UpdateWheel(WheelCollider wheel)
@@ -60,7 +63,7 @@ public class CarController : MonoBehaviour
         {
             if (boosting)
             {
-                body.AddForce(tf.forward * thrust);
+                body.AddForce(tf.forward * thrust, ForceMode.Acceleration);
             }
             float motor = baseTorque * torque;
             float steering = maxSteerAngle * steerAngle;
@@ -80,6 +83,15 @@ public class CarController : MonoBehaviour
                 UpdateWheel(axel.GetLeft());
                 UpdateWheel(axel.GetRight());
             }
+
+            if (braking)
+            {
+                Brake(brakeTorque);
+            }
+            else
+            {
+                Brake(0.0f);
+            }
         }
 
         if (Vector3.Dot(tf.up, Vector3.down) > 0 || body.velocity == Vector3.zero)
@@ -94,6 +106,19 @@ public class CarController : MonoBehaviour
         if (respawnTimer >= timeToRespawn)
         {
             Respawn();
+        }
+    }
+
+
+    private void Brake(float bTorque)
+    {
+        foreach (AxelData axel in axels)
+        {
+            if (axel.IsBraked())
+            {
+                axel.GetLeft().brakeTorque = bTorque;
+                axel.GetRight().brakeTorque = bTorque;
+            }
         }
     }
 
@@ -115,11 +140,13 @@ public class CarController : MonoBehaviour
 
     private void GameOver()
     {
+        enabled = false;
         lapCnt = 0;
     }
 
     private void RaceStart()
     {
+        enabled = true;
         racing = true;
     }
 }
