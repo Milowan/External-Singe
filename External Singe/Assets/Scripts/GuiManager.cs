@@ -12,7 +12,6 @@ public class GuiManager : MonoBehaviour
     public Text placeText;
     public Text countDownText;
 
-    private bool firstRun;
     private bool running;
 
     public static int playerLap;
@@ -31,7 +30,6 @@ public class GuiManager : MonoBehaviour
         placeText.enabled = false;
         countDownText.enabled = false;
 
-        firstRun = true;
         running = false;
         GameEventManager.GameStart += GameStart;
         GameEventManager.GameOver += GameOver;
@@ -55,33 +53,16 @@ public class GuiManager : MonoBehaviour
 
     private void GameStart()
     {
-        if (firstRun)
-        {
-            titleText.enabled = false;
-        }
-        else
-        {
-            gameOverText.enabled = false;
-        }
-        instructionsText.enabled = false;
-        lapText.enabled = true;
-        placeText.enabled = false;
-        countDownText.enabled = true;
         running = true;
-        firstRun = false;
     }
 
     private void GameOver()
     {
-        instructionsText.enabled = true;
-        gameOverText.enabled = true;
-        lapText.enabled = false;
-        placeText.enabled = true;
         running = false;
     }
 
     private void RaceStart()
     {
-        countDownText.enabled = false;
+       
     }
 }

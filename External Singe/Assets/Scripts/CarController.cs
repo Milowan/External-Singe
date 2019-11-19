@@ -17,6 +17,10 @@ public class CarController : MonoBehaviour
     protected bool boosting;
     protected bool braking;
 
+    private float maxNoS;
+    private float baseNoS;
+    private float NoSUsed;
+
     protected bool racing;
     public float respawnTimer;
     public float timeToRespawn;
