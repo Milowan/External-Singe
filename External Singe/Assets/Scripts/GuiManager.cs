@@ -13,6 +13,7 @@ public class GuiManager : MonoBehaviour
     public Text countDownText;
 
     private bool running;
+    private bool inMenu;
 
     public static int playerLap;
     public static int maxLaps;
@@ -30,10 +31,10 @@ public class GuiManager : MonoBehaviour
         placeText.enabled = false;
         countDownText.enabled = false;
 
+        inMenu = false;
         running = false;
         GameEventManager.GameStart += GameStart;
         GameEventManager.GameOver += GameOver;
-        GameEventManager.RaceStart += RaceStart;
     }
 
     // Update is called once per frame
@@ -41,9 +42,20 @@ public class GuiManager : MonoBehaviour
     {
         if (!running)
         {
-            if (Input.GetButtonDown("Jump"))
+            if (!inMenu)
             {
-                GameEventManager.TriggerGameStart();
+                if (Input.GetButtonDown("Jump"))
+                {
+                    GameEventManager.TriggerGameStart();
+                }
+                if (Input.GetButtonDown("Options"))
+                {
+                    GameEventManager.OpenMenu();
+                }
+            }
+            else if (Input.GetButtonDown("Options"))
+            {
+                GameEventManager.CloseMenu();
             }
         }
         lapText.text = "Lap " + playerLap + "/" + maxLaps;
@@ -61,8 +73,13 @@ public class GuiManager : MonoBehaviour
         running = false;
     }
 
-    private void RaceStart()
+    private void MenuOpen()
     {
-       
+        inMenu = true;
+    }
+
+    private void MenuClose()
+    {
+        inMenu = false;
     }
 }

@@ -17,9 +17,9 @@ public class CarController : MonoBehaviour
     protected bool boosting;
     protected bool braking;
 
-    private float maxNoS;
-    private float baseNoS;
-    private float NoSUsed;
+    protected float maxNoS;
+    public float baseNoS;
+    protected float NoSUsed;
 
     protected bool racing;
     public float respawnTimer;
@@ -43,6 +43,7 @@ public class CarController : MonoBehaviour
         startRotation = tf.rotation;
         boosting = false;
         enabled = false;
+        NoSUsed = 0.0f;
     }
 
     public void UpdateWheel(WheelCollider wheel)
@@ -67,8 +68,13 @@ public class CarController : MonoBehaviour
         {
             if (boosting)
             {
-                body.AddForce(tf.forward * thrust, ForceMode.Acceleration);
+                Boost();
             }
+            else if (NoSUsed > 0.0f)
+            {
+                NoSUsed -= Time.deltaTime / 2;
+            }
+
             float motor = baseTorque * torque;
             float steering = maxSteerAngle * steerAngle;
 
@@ -127,14 +133,25 @@ public class CarController : MonoBehaviour
     }
 
 
-    private void Respawn()
+    protected virtual void Respawn()
     {
         tf.position = respawnPoint.position;
         tf.rotation = respawnPoint.rotation;
+        maxNoS = baseNoS;
+    }
+
+    private void Boost()
+    {
+        if (NoSUsed < maxNoS)
+        {
+            body.AddForce(tf.forward * thrust, ForceMode.Acceleration);
+            NoSUsed += Time.deltaTime;
+        }
     }
 
     private void GameStart()
     {
+        maxNoS = baseNoS;
         tf.position = startPosition;
         tf.rotation = startRotation;
         body.velocity.Set(0.0f, 0.0f, 0.0f);

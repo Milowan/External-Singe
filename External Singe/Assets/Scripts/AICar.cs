@@ -111,5 +111,15 @@ public class AICar : CarController
             respawnPoint = other.gameObject.transform;
             respawnTimer = 0;
         }
+
+        if (other.gameObject.CompareTag("BoNoS"))
+        {
+            if (maxNoS < 4 * baseNoS)
+            {
+                maxNoS += baseNoS;
+            }
+
+            NoSUsed = 0.0f;
+        }
     }
 }
