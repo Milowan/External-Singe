@@ -10,6 +10,7 @@ TagManager:
   - PContainer
   - PWaypoint
   - Car
+  - BoNoS
   layers:
   - Default
   - TransparentFX
