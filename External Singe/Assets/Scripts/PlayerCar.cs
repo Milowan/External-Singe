@@ -8,13 +8,12 @@ public class PlayerCar : CarController
     private bool canLap;
 
     private Slider NoSSlider;
-    private float baseSliderWidth;
 
-    private void Awake()
+    private void Start()
     {
         canLap = false;
         NoSSlider = GameObject.Find("NoSMeter").GetComponent<Slider>();
-        baseSliderWidth = NoSSlider.transform.localScale.x;
+        GameObject.Find("Options").GetComponent<Menu>().SetPlayer(this);
     }
 
     // Update is called once per frame
@@ -45,10 +44,18 @@ public class PlayerCar : CarController
         GuiManager.playerLap = lapCnt;
     }
 
+    public void SetColour(float r, float g, float b)
+    {
+        colour.r = r;
+        colour.g = g;
+        colour.b = b;
+        bodyMat.SetColor("_Color", colour);
+    }
+
     protected override void Respawn()
     {
-        base.Respawn();
-        NoSSlider.transform.localScale.Set(baseSliderWidth, NoSSlider.transform.localScale.y, NoSSlider.transform.localScale.z);
+        base.Respawn(); 
+        NoSSlider.gameObject.GetComponent<RectTransform>().sizeDelta = new Vector2(NoSSlider.gameObject.GetComponent<RectTransform>().sizeDelta.x * ((maxNoS / baseNoS) + 1), NoSSlider.gameObject.GetComponent<RectTransform>().sizeDelta.y);
     }
 
     private void OnTriggerEnter(Collider other)
@@ -71,8 +78,8 @@ public class PlayerCar : CarController
         {
             if (maxNoS < 4 * baseNoS)
             {
-                NoSSlider.gameObject.GetComponent<RectTransform>().sizeDelta = new Vector2(NoSSlider.gameObject.GetComponent<RectTransform>().sizeDelta.x * ((maxNoS / baseNoS) + 1), NoSSlider.gameObject.GetComponent<RectTransform>().sizeDelta.y);
                 maxNoS += baseNoS;
+                NoSSlider.gameObject.GetComponent<RectTransform>().sizeDelta = new Vector2(NoSSlider.gameObject.GetComponent<RectTransform>().sizeDelta.x * ((maxNoS / baseNoS)), NoSSlider.gameObject.GetComponent<RectTransform>().sizeDelta.y);
             }
 
             NoSUsed = 0.0f;

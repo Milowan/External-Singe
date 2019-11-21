@@ -21,6 +21,9 @@ public class CarController : MonoBehaviour
     public float baseNoS;
     protected float NoSUsed;
 
+    protected Color colour;
+    protected Material bodyMat;
+
     protected bool racing;
     public float respawnTimer;
     public float timeToRespawn;
@@ -30,7 +33,7 @@ public class CarController : MonoBehaviour
     public int lapCnt;
     public bool finished;
 
-    private void Start()
+    private void Awake()
     {
         lapCnt = 0;
         maxSteerAngle = 30;
@@ -39,6 +42,8 @@ public class CarController : MonoBehaviour
         GameEventManager.RaceStart += RaceStart;
         tf = GetComponent<Transform>();
         body = GetComponent<Rigidbody>();
+        bodyMat = transform.GetChild(0).GetComponent<Renderer>().material;
+        colour = bodyMat.color;
         startPosition = tf.position;
         startRotation = tf.rotation;
         boosting = false;

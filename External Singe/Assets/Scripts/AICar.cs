@@ -10,8 +10,12 @@ public class AICar : CarController
     public Transform nextWaypoint;
     private int targetWaypointIndex;
 
-    private void Awake()
+    private void Start()
     {
+        colour.r = Random.Range(0.0f, 255f);
+        colour.g = Random.Range(0.0f, 255f);
+        colour.b = Random.Range(0.0f, 255f);
+        bodyMat.SetColor("_Color", colour);
         containers = GameObject.FindGameObjectsWithTag("Container");
         waypoints = new List<Transform>();
         SelectPath();

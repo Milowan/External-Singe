@@ -35,6 +35,8 @@ public class GuiManager : MonoBehaviour
         running = false;
         GameEventManager.GameStart += GameStart;
         GameEventManager.GameOver += GameOver;
+        GameEventManager.MenuOpen += MenuOpen;
+        GameEventManager.MenuClose += MenuClose;
     }
 
     // Update is called once per frame
