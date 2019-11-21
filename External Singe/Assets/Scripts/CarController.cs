@@ -49,6 +49,12 @@ public class CarController : MonoBehaviour
         boosting = false;
         enabled = false;
         NoSUsed = 0.0f;
+        Init();
+    }
+
+    protected virtual void Init()
+    {
+
     }
 
     public void UpdateWheel(WheelCollider wheel)

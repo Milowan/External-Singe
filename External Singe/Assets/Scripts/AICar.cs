@@ -10,7 +10,7 @@ public class AICar : CarController
     public Transform nextWaypoint;
     private int targetWaypointIndex;
 
-    private void Start()
+    protected override void Init()
     {
         colour.r = Random.Range(0.0f, 255f);
         colour.g = Random.Range(0.0f, 255f);

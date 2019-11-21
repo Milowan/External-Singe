@@ -9,7 +9,7 @@ public class PlayerCar : CarController
 
     private Slider NoSSlider;
 
-    private void Start()
+    protected override void Init()
     {
         canLap = false;
         NoSSlider = GameObject.Find("NoSMeter").GetComponent<Slider>();
