@@ -11,21 +11,18 @@ public class MenuSlider : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        fill = GetComponent<Slider>().fillRect;
-        handle = GetComponent<Slider>().handleRect;
-        handle.GetComponent<CanvasRenderer>().SetAlpha(0.0f);
-        fill.GetComponent<CanvasRenderer>().SetAlpha(0.0f);
+        gameObject.SetActive(false);
+        GameEventManager.MenuOpen += MenuOpen;
+        GameEventManager.MenuClose += MenuClose;
     }
 
     private void MenuOpen()
     {
-        handle.GetComponent<CanvasRenderer>().SetAlpha(1.0f);
-        fill.GetComponent<CanvasRenderer>().SetAlpha(1.0f);
+        gameObject.SetActive(true);
     }
 
     private void MenuClose()
     {
-        handle.GetComponent<CanvasRenderer>().SetAlpha(0.0f);
-        fill.GetComponent<CanvasRenderer>().SetAlpha(0.0f);
+        gameObject.SetActive(false);
     }
 }
