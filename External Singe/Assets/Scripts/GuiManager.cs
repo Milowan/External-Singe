@@ -5,9 +5,6 @@ using UnityEngine.UI;
 
 public class GuiManager : MonoBehaviour
 {
-    public Text titleText;
-    public Text instructionsText;
-    public Text gameOverText;
     public Text lapText;
     public Text placeText;
     public Text countDownText;
@@ -24,9 +21,6 @@ public class GuiManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        titleText.enabled = true;
-        instructionsText.enabled = true;
-        gameOverText.enabled = false;
         lapText.enabled = false;
         placeText.enabled = false;
         countDownText.enabled = false;

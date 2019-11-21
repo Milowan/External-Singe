@@ -9,7 +9,7 @@ public class BoNoS : MonoBehaviour
     {
         if (other.gameObject.CompareTag("Car"))
         {
-            enabled = false;
+            gameObject.SetActive(false);
         }
     }
 }
